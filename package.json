@@ -1,0 +1,46 @@
+{
+    "name": "hand-gesture-controller",
+    "version": "1.0.0",
+    "description": "Hand gestures for applications using MediaPipe",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "tsc",
+        "prepublishOnly": "npm run build"
+    },
+    "keywords": [
+        "nextjs",
+        "hand-gesture",
+        "voice-control",
+        "mediapipe",
+        "react",
+        "gesture-control"
+    ],
+    "author": "Shubham Ragaji",
+    "license": "MIT",
+    "peerDependencies": {
+        "next": ">=13.0.0",
+        "react": ">=18.0.0",
+        "react-dom": ">=18.0.0"
+    },
+    "dependencies": {
+        "@mediapipe/camera_utils": "^0.3.1675466862",
+        "@mediapipe/drawing_utils": "^0.3.1675466124",
+        "@mediapipe/hands": "^0.4.1675469240",
+        "@mediapipe/tasks-vision": "^0.10.14",
+        "modern-screenshot": "^4.6.6",
+        "react-toastify": "^11.0.5"
+    },
+    "devDependencies": {
+        "@types/node": "^20",
+        "@types/react": "^19",
+        "@types/react-dom": "^19",
+        "next": "^15.5.2",
+        "react": "^19.1.0",
+        "react-dom": "^19.1.0",
+        "typescript": "^5.9.3"
+    }
+}
