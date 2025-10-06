@@ -778,12 +778,12 @@ export function useHandGestures() {
         const deltaY = avgY - lastY;
 
         if (isIndexUp && isMiddleUp && deltaY < -threshold) {
-          window.scrollBy({ top: 400, behavior: "smooth" });
+          window.scrollBy({ top: 500, behavior: "smooth" });
           lastActionRef.current = now;
           historyYRef.current = [];
           resetClickState();
         } else if (isIndexUp && !isMiddleUp && deltaY > threshold) {
-          window.scrollBy({ top: -400, behavior: "smooth" });
+          window.scrollBy({ top: -500, behavior: "smooth" });
           lastActionRef.current = now;
           historyYRef.current = [];
           resetClickState();

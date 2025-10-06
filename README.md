@@ -12,12 +12,34 @@ npm install hand-gesture-controller
 
 ## ✅ Supported Gestures
 
-- ☝️ **Index finger only** → Move cursor + scroll
-- ☝️ **Hold cursor on clickable element (1.5s)** → Click/Tap
-- ✌️ **Two fingers - Index and middle** → Scroll down
-- 🖐 **Four fingers pointing at the screen** → Swipe (Next / Previous)
-- ✊ **Fist (hold 2.5s)** → Screenshot
-- 🖐 **Palm (hold 2.5s)** → Full Page Screenshot
+☝️ **Index finger only**
+
+- Move your index finger up or down in front of the camera to scroll the page vertically — just like using a mouse wheel or trackpad.
+
+☝️ **Hold cursor on clickable element (1.5s)**
+
+- Hold your index finger steady over a clickable element (like a button or link) for about 1.5 seconds to perform a click/tap action.
+
+✌️ **Two fingers - Index and middle**
+
+- When you show two fingers, move them up or down to scroll the page — this provides a smoother and faster scroll compared to the single-finger gesture.
+
+🖐 **Four fingers pointing at the screen**
+
+- Extend four fingers toward the camera to activate the swipe gesture.
+- Move your hand left or right to navigate between pages, for example:
+  - Swipe left → right for Previous Page
+  - Swipe right → left for Next Page
+
+✊ **Fist (hold 2.5s)**
+
+- Make a fist and hold it steady for about 2.5 seconds.
+- This triggers a screenshot of the visible part of your screen.
+
+🖐 **Palm (hold 2.5s)**
+
+- Show your open palm (all five fingers extended) and hold for 2.5 seconds.
+- This takes a full-page screenshot, capturing the entire scrollable area of the page.
 
 ## ✅ Features
 
@@ -32,7 +54,7 @@ npm install hand-gesture-controller
 
 ```js
 import "./globals.css";
-import HandGestureController from "hand-gesture-controller";
+import { HandGestureController } from "hand-gesture-controller";
 
 export default function RootLayout({
   children,
