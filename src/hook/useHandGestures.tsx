@@ -366,12 +366,6 @@ export function useHandGestures() {
             {
               autoClose: 3000,
               onClose: () => {
-                let alreadyShown = sessionStorage.getItem(
-                  "gestureInstructionsShown"
-                );
-
-                if (alreadyShown === "true") return;
-
                 toast.info(
                   <div>
                     <div className="pb-2">
@@ -392,10 +386,6 @@ export function useHandGestures() {
                     pauseOnHover: true,
                   }
                 );
-
-                if (alreadyShown !== "true") {
-                  sessionStorage.setItem("gestureInstructionsShown", "true");
-                }
               },
             }
           );

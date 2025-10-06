@@ -7,15 +7,15 @@ A powerful and intuitive React library that transforms web navigation through ha
 ## ✅ Installation
 
 ```bash
-npm install react-hand-gesture-control
+npm install hand-gesture-controller
 ```
 
 ## ✅ Supported Gestures
 
 - ☝️ **Index finger only** → Move cursor + scroll
 - ☝️ **Hold cursor on clickable element (1.5s)** → Click/Tap
-- ✌️ **Two fingers - Index and middle** → Scroll down  
-- 🖐 **Four fingers pointing at the screen** → Swipe (Next / Previous)  
+- ✌️ **Two fingers - Index and middle** → Scroll down
+- 🖐 **Four fingers pointing at the screen** → Swipe (Next / Previous)
 - ✊ **Fist (hold 2.5s)** → Screenshot
 - 🖐 **Palm (hold 2.5s)** → Full Page Screenshot
 
@@ -32,7 +32,7 @@ npm install react-hand-gesture-control
 
 ```js
 import "./globals.css";
-import HandGestureController from "@/components/HandGestureController";
+import HandGestureController from "hand-gesture-controller";
 
 export default function RootLayout({
   children,

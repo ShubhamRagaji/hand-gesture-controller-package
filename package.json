@@ -14,10 +14,10 @@
     "keywords": [
         "nextjs",
         "hand-gesture",
-        "voice-control",
         "mediapipe",
         "react",
-        "gesture-control"
+        "gesture-control",
+        "gestures"
     ],
     "author": "Shubham Ragaji",
     "license": "MIT",
