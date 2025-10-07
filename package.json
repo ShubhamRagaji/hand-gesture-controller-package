@@ -1,6 +1,6 @@
 {
     "name": "hand-gesture-controller",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "Hand gestures for applications using MediaPipe",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
