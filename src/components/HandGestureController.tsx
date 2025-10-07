@@ -52,6 +52,12 @@ export default function HandGestureController() {
       <div
         id="custom-cursor"
         className="fixed w-4 h-4 bg-[rgba(0,0,0,0.8)] border-2 border-white rounded-full pointer-events-none z-[10000] hidden shadow-[0_0_10px_rgba(255,0,0,0.5)] transition-opacity duration-200 ease-in-out"
+        style={{
+          background: "#000",
+          zIndex: 10000,
+          boxShadow: "0 0 10px rgba(255,0,0,0.5)",
+          border: "2px solid white",
+        }}
       />
     </>
   );

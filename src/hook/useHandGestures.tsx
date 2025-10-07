@@ -101,7 +101,6 @@ export function useHandGestures() {
     if (!element) return false;
 
     const tagName = element.tagName.toLowerCase();
-    const styles = window.getComputedStyle(element);
 
     // 1. Check naturally clickable HTML tags
     const clickableTags = [
@@ -116,105 +115,12 @@ export function useHandGestures() {
     ];
     if (clickableTags.includes(tagName)) return true;
 
-    // 2. Check for ANY onclick-related attributes (works on any element)
+    // 2. Check for onclick attribute
     if (element.hasAttribute("onclick")) return true;
 
-    // 3. Check for ALL event handler attributes (on*, @, (), etc.)
-    const hasEventHandler = Array.from(element.attributes).some((attr) => {
-      const name = attr.name.toLowerCase();
-      return (
-        name.startsWith("on") || // onclick, onmousedown, onpointerdown, etc.
-        name.startsWith("@") || // Vue: @click
-        name.startsWith("(") || // Angular: (click)
-        name.includes(":click") || // Vue shorthand: v-on:click
-        name.includes("v-on") // Vue: v-on:click
-      );
-    });
-    if (hasEventHandler) return true;
-
-    // 4. Check cursor style (strong indicator of clickability)
-    if (styles.cursor === "pointer") return true;
-
-    // 5. Check ARIA roles for interactive elements
-    const role = element.getAttribute("role");
-    const interactiveRoles = [
-      "button",
-      "link",
-      "menuitem",
-      "menuitemcheckbox",
-      "menuitemradio",
-      "option",
-      "tab",
-      "checkbox",
-      "radio",
-      "switch",
-      "slider",
-      "spinbutton",
-      "textbox",
-      "combobox",
-      "gridcell",
-      "treeitem",
-    ];
-    if (role && interactiveRoles.includes(role)) return true;
-
-    // 6. Check tabindex (focusable elements are often interactive)
-    const tabindex = element.getAttribute("tabindex");
-    if (tabindex !== null && parseInt(tabindex) >= 0) return true;
-
-    // 7. Check for data attributes suggesting interactivity
-    const hasInteractiveDataAttr = Array.from(element.attributes).some(
-      (attr) => {
-        const name = attr.name.toLowerCase();
-        return (
-          name.startsWith("data-") &&
-          (name.includes("click") ||
-            name.includes("action") ||
-            name.includes("handler") ||
-            name.includes("toggle") ||
-            name.includes("trigger") ||
-            name.includes("interact"))
-        );
-      }
-    );
-    if (hasInteractiveDataAttr) return true;
-
-    // 8. Check for contenteditable (editable areas are interactive)
-    if (element.hasAttribute("contenteditable")) return true;
-
-    // 9. Check for interactive-looking class names
-    const className = element.className;
-    if (typeof className === "string") {
-      const interactiveClassPatterns = [
-        "btn",
-        "button",
-        "click",
-        "link",
-        "interactive",
-        "action",
-        "menu",
-        "tab",
-        "toggle",
-        "card",
-        "tile",
-        "item",
-        "trigger",
-        "handle",
-      ];
-      const lowerClassName = className.toLowerCase();
-      if (
-        interactiveClassPatterns.some((pattern) =>
-          lowerClassName.includes(pattern)
-        )
-      ) {
-        return true;
-      }
-    }
-
-    // 10. Deep check for React event listeners (React Fiber)
-    // React attaches event listeners via its internal fiber structure
+    // 3. Check for React onClick props
     const elementKeys = Object.keys(element);
 
-    // Check React Props first (most reliable)
     const propsKey = elementKeys.find((key) => key.startsWith("__reactProps"));
     if (propsKey) {
       try {
@@ -223,11 +129,10 @@ export function useHandGestures() {
           return true;
         }
       } catch (e) {
-        // Silently fail if we can't access React internals
+        // Silently fail
       }
     }
 
-    // Check React Fiber memoizedProps
     const fiberKey = elementKeys.find((key) => key.startsWith("__reactFiber"));
     if (fiberKey) {
       try {
@@ -240,47 +145,7 @@ export function useHandGestures() {
           return true;
         }
       } catch (e) {
-        // Silently fail if we can't access React internals
-      }
-    }
-
-    // 11. Check for Vue event listeners
-    const vueKey = elementKeys.find((key) => key.startsWith("__vue"));
-    if (vueKey) {
-      try {
-        const vueInstance = (element as any)[vueKey];
-        if (vueInstance && vueInstance.onClick) {
-          return true;
-        }
-      } catch (e) {
         // Silently fail
-      }
-    }
-
-    // 12. Check if element has any event listeners at all (browser API)
-    // This checks the browser's internal event listener registry
-    if (typeof (window as any).getEventListeners === "function") {
-      try {
-        const listeners = (window as any).getEventListeners(element);
-        if (listeners && (listeners.click || listeners.mousedown)) {
-          return true;
-        }
-      } catch (e) {
-        // Not available in all browsers
-      }
-    }
-
-    // 14. Final check: elements with pointer-events enabled + visual cues
-    if (styles.pointerEvents !== "none") {
-      // Has transform/transition effects (often used for interactive elements)
-      const hasVisualEffects =
-        styles.transition.includes("transform") ||
-        styles.transition.includes("opacity") ||
-        styles.transition.includes("background") ||
-        styles.transform !== "none";
-
-      if (hasVisualEffects && className && typeof className === "string") {
-        return true;
       }
     }
 
@@ -747,6 +612,10 @@ export function useHandGestures() {
         cursorElementRef.current.style.display = "block";
         cursorElementRef.current.style.left = `${smoothed.x - 8}px`;
         cursorElementRef.current.style.top = `${smoothed.y - 8}px`;
+        cursorElementRef.current.style.background = `#000`;
+        cursorElementRef.current.style.zIndex = `10000`;
+        cursorElementRef.current.style.boxShadow = "0 0 10px rgba(255,0,0,0.5)";
+        cursorElementRef.current.style.border = "2px solid white";
       }
     }
 
